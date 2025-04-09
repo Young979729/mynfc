@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的社交主页</title>
+    <style>
+        /* 基础样式保持不变 */
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #f0f2f5; 
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+/* 在样式中添加 */
+.loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 18px;
+    color: #007bff;
+}
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid #007bff;
+        }
+        .button {
+            display: block;
+            background: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 12px 0;
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+        }
+        #wechatPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="card">
+        <img src="https://i.ibb.co/你的头像路径.jpg" class="avatar" alt="头像">
+        <h2>刘世源</h2>
+        <p>欢迎联系我！</p>
+
+        <!-- 微信（点击显示弹窗） -->
+        <a href="javascript:void(0)" class="button" onclick="showWechat()">
+            <i class="fab fa-weixin"></i> 显示微信号
+        </a>
+
+        <!-- 电话 -->
+        <a href="tel:18844852951" class="button">
+            <i class="fas fa-phone"></i> 拨打电话
+        </a>
+
+        <!-- 抖音（直接使用主页链接） -->
+        <a href="https://v.douyin.com/Qor3o1kmHkA/ 4@0.com :9pm" 
+           class="button" 
+           target="_blank">
+            <i class="fab fa-tiktok"></i> 抖音主页
+        </a>
+       <!-- 快手 -->
+        <a href="https://v.kuaishou.com/whwlFB" 
+           class="button">
+                    <i class="fas fa-video"></i> 快手关注
+        </a>
+
+
+       </div>
+
+    <!-- 微信弹窗 -->
+    <div id="wechatPopup">
+        <h3>我的微信号</h3>
+        <p style="font-size:24px; margin:15px 0; color:#007bff;">L-LL_sy</p>
+        <button onclick="copyWechat()" style="padding:8px 20px; background:#007bff; color:white; border:none; border-radius:5px;">
+            复制微信号
+        </button>
+        <button onclick="hideWechat()" style="margin-left:10px; padding:8px 20px; background:#666; color:white; border:none; border-radius:5px;">
+            关闭
+        </button>
+    </div>
+
+    <!-- 功能脚本 -->
+    <script>
+        // 显示微信弹窗
+        function showWechat() {
+            document.getElementById("wechatPopup").style.display = 'block';
+        }
+
+        // 隐藏微信弹窗
+        function hideWechat() {
+            document.getElementById("wechatPopup").style.display = 'none';
+        }
+
+        // 复制微信号
+        function copyWechat() {
+            const wechatId = 'zhangsan123'; // 替换你的微信号
+            navigator.clipboard.writeText(wechatId).then(() => {
+                alert('微信号已复制到剪贴板！');
+            });
+        }
+
+        // 点击外部区域关闭弹窗
+        document.addEventListener('click', function(e) {
+            if (!document.getElementById('wechatPopup').contains(e.target) && 
+                !e.target.closest('.button')) {
+                hideWechat();
+            }
+        });
+    </script>
+</body>
+<!-- 在body末尾添加 -->
+<div class="loading">正在跳转中...</div>
+<script>
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelector('.loading').style.display = 'block';
+        });
+    });
+</script>
+</html>
